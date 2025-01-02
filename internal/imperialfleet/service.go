@@ -32,7 +32,13 @@ func (s *Service) List(res http.ResponseWriter, req *http.Request) {
 	ctx := req.Context()
 	enc := json.NewEncoder(res)
 
-	items, err := s.persist.List(ctx, models.ListCraftRequest{})
+	lr := models.ListCraftRequest{
+		Name:   mux.Vars(req)["name"],
+		Class:  mux.Vars(req)["class"],
+		Status: mux.Vars(req)["status"],
+	}
+
+	items, err := s.persist.List(ctx, lr)
 	if err != nil {
 		s.log.Error("failed to list items", "error", err)
 		res.WriteHeader(http.StatusInternalServerError)
