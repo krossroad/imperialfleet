@@ -64,9 +64,11 @@ func NewService(ctx context.Context, log *logger.Entry, opt Options) (*Service, 
 	return svc, nil
 }
 
-func registerRoute(r *mux.Router, svc *imperialfleet.Service) {
-	r.HandleFunc("/", svc.Create).Methods(http.MethodPost)
-	r.HandleFunc("/", svc.List).Methods(http.MethodGet)
+func registerRoute(s *mux.Router, svc *imperialfleet.Service) {
+	r := s.PathPrefix("/spaceships").Subrouter()
+
+	r.HandleFunc("", svc.Create).Methods(http.MethodPost)
+	r.HandleFunc("", svc.List).Methods(http.MethodGet)
 	r.HandleFunc("/{id}", svc.Delete).Methods(http.MethodDelete)
 	r.HandleFunc("/{id}", svc.Update).Methods(http.MethodPut)
 	r.HandleFunc("/{id}", svc.Show).Methods(http.MethodGet)
