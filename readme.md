@@ -62,12 +62,12 @@ docker-compose up -d
   "class": "Star Destroyer",
   "crew": 35000,
   "image": "https://url.to.image",
-  "value": 1999.99,
+  "value": 199999,
   "status": "Operational",
   "armament": [
-    { "title": "Turbo Laser", "qty": "60" },
-    { "title": "Ion Cannons", "qty": "60" },
-    { "title": "Tractor Beam", "qty": "10" }
+    { "title": "Turbo Laser", "quantity": "60" },
+    { "title": "Ion Cannons", "quantity": "60" },
+    { "title": "Tractor Beam", "quantity": "10" }
   ]
 }
 ```
@@ -84,10 +84,10 @@ docker-compose up -d
   "name": "string",
   "class": "string",
   "crew": "integer",
-  "value": "decimal",
+  "value": "integer",
   "status": "string",
   "armament": [
-    { "title": "string", "qty": "integer" }
+    { "title": "string", "quantity": "integer" }
   ],
   "image": "string"
 }
