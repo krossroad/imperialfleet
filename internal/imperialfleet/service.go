@@ -51,7 +51,9 @@ func (s *Service) List(res http.ResponseWriter, req *http.Request) {
 	}
 
 	res.Header().Set("Content-Type", "application/json")
-	if err := json.NewEncoder(res).Encode(items); err != nil {
+	if err := json.NewEncoder(res).Encode(map[string]any{
+		"spaceships": items,
+	}); err != nil {
 		s.log.Error("failed to encode response", "error", err)
 		res.WriteHeader(http.StatusInternalServerError)
 		http.Error(res, err.Error(), http.StatusInternalServerError)

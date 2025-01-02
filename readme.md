@@ -31,7 +31,7 @@ docker-compose up -d
 - **Response:**
 ```json
 {
-  "data": [
+  "spaceships": [
     {
       "id": 1,
       "name": "Devastator",
