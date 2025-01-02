@@ -23,7 +23,7 @@ func (s *SQL) List(ctx context.Context, lr models.ListCraftRequest) ([]*models.S
 	tx := s.db.WithContext(ctx).Order("id DESC").Preload("Armaments")
 
 	if lr.Name != "" {
-		tx.Where("name like ", lr.Name+"%")
+		tx.Where("name like ?", lr.Name+"%")
 	} else if lr.Class != "" {
 		tx.Where("class = ?", lr.Class)
 	} else if lr.Status != "" {

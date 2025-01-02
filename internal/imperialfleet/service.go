@@ -32,10 +32,12 @@ func (s *Service) List(res http.ResponseWriter, req *http.Request) {
 	ctx := req.Context()
 	enc := json.NewEncoder(res)
 
+	s.log.Info("list crafts", "query", req.URL.Query().Get("name"))
+
 	lr := models.ListCraftRequest{
-		Name:   mux.Vars(req)["name"],
-		Class:  mux.Vars(req)["class"],
-		Status: mux.Vars(req)["status"],
+		Name:   req.URL.Query().Get("name"),
+		Class:  req.URL.Query().Get("class"),
+		Status: req.URL.Query().Get("status"),
 	}
 
 	items, err := s.persist.List(ctx, lr)
