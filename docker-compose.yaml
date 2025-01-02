@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+  imperialfleet:
+    build:
+      context: .
+      dockerfile: .dockerfiles/imperialfleet.dockerfile
+    ports:
+      - "5051:5051"
+    environment:
+      - HTTP_ADDR=:5051
+      - DB_URL=imperialfleet:imperialfleet@tcp(mysqldb)/imperialfleet?parseTime=true
+    depends_on:
+      - mysqldb
+    entrypoint: >
+      bash -c 'air .air.toml'
+    volumes:
+      - .:/app
+
+  mysqldb:
+    image: mysql:8
+    ports:
+      - "127.0.0.1:3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=mysql123
+      - MYSQL_DATABASE=imperialfleet
+      - MYSQL_USER=imperialfleet
+      - MYSQL_PASSWORD=imperialfleet
+    volumes:
+      - .data/mysql:/var/lib/mysql
+
